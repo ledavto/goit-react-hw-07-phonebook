@@ -12,8 +12,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   </Provider>
 );
 
-// https://mockapi.io/projects/657855f2f08799dc8044f5c3#
+
 
 // npm install redux
 // npm install react-redux
 // npm install @redux-devtools/extension
+// npm install @reduxjs/toolkit
+// npm i axios
