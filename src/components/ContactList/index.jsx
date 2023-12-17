@@ -1,13 +1,18 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { delUserAction } from '../../redux/user/userSlice';
+import { deleteContact, fetchContacts } from '../../redux/operations';
+import { useEffect } from 'react';
 
 export const ContactList = () => {
   const dispatch = useDispatch();
 
-  const listCont = useSelector(state => {
-    return state.user.contacts;
-  });
-  // console.log('listCont', listCont);
+  // Отримуємо частини стану
+  const items = useSelector(state => state.user.contacts.items);
+  // console.log('items', items);
+
+  // Викликаємо операцію
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
   const filter = useSelector(state => {
     // console.log(state);
@@ -15,12 +20,12 @@ export const ContactList = () => {
   });
 
   const deleteCont = id => {
-    dispatch(delUserAction(id));
+    dispatch(deleteContact(id));
   };
 
   return (
     <ul className="list-group">
-      {listCont
+      {items
         .filter(item => item.name.toLowerCase().includes(filter.toLowerCase()))
         .map(elem => (
           <li
@@ -28,7 +33,7 @@ export const ContactList = () => {
             key={elem.id}
           >
             <label>
-              {elem.name} - {elem.number}
+              {elem.name} - {elem.phone}
             </label>
 
             <button

@@ -3,7 +3,7 @@ import { initialState } from './initialState';
 
 const filterSlice = createSlice({
   name: 'filterReducer',
-  initialState: initialState,
+  initialState,
   reducers: {
     filterStrAction: (state, action) => {
       // console.log(state.filter.filter);
