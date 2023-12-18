@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { nanoid } from 'nanoid';
 import { addContact, fetchContacts } from '../../redux/operations';
 import { useEffect } from 'react';
 // import { addUserAction } from '../../redux/user/userSlice';
@@ -23,23 +22,22 @@ export const ContactForm = () => {
       phone: e.target.number.value,
     };
 
-    // if (newCont.name) {
-    //   const contObj = { id: nanoid(), ...newCont };
-    //   // Массив имен из объекта
-    //   const arrName = [];
-    //   for (const contact of listCont) {
-    //     arrName.push(contact.name);
-    //   }
-    //   //Проверка на наличие уже такого имени
-    //   const arrNameLowerCase = arrName.map(elem => elem.toLowerCase());
-    //   if (arrNameLowerCase.includes(newCont.name.toLowerCase())) {
-    //     alert(`${newCont.name} is already in contacts`);
-    //     return;
-    //   }
-    //   // dispatch(addUserAction(contObj));
-    // }
+    if (newCont.name) {
+      // const contObj = { ...newCont };
+      // Массив имен из объекта
+      const arrName = [];
+      for (const contact of listCont) {
+        arrName.push(contact.name);
+      }
+      //Проверка на наличие уже такого имени
+      const arrNameLowerCase = arrName.map(elem => elem.toLowerCase());
+      if (arrNameLowerCase.includes(newCont.name.toLowerCase())) {
+        alert(`${newCont.name} is already in contacts`);
+        return;
+      }
+      dispatch(addContact(newCont));
+    }
 
-    dispatch(addContact(newCont));
     form.reset();
   };
 
